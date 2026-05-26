@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+问题图片
+dist/
+build/
+*.egg-info/
