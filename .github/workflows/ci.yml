@@ -70,11 +70,15 @@ jobs:
           path: dist/
 
       - name: Publish to PyPI
-        if: ${{ secrets.PYPI_API_TOKEN != '' }}  # 配置了 token 才发布
+        if: env.PYPI_API_TOKEN != ''
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
 
       - name: Skip publish (no token configured)
-        if: ${{ secrets.PYPI_API_TOKEN == '' }}
+        if: env.PYPI_API_TOKEN == ''
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: echo "PYPI_API_TOKEN not configured, skipping publish."
